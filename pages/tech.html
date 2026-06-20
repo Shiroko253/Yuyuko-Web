@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛠️ 技術架構 - Yuyuko Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        sakura: {
+                            300: '#ffb7c5',
+                            400: '#ff91a4',
+                            500: '#ff69b4',
+                            600: '#ff1493',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="relative">
+    <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="../index.html" class="flex items-center space-x-2">
+                    <span class="text-3xl">🌸</span>
+                    <span class="font-serif font-bold text-xl text-sakura-300">Yuyuko Bot</span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
+                    <a href="../index.html" class="hover:text-sakura-300 transition">首頁</a>
+                    <a href="commands.html" class="hover:text-sakura-300 transition">指令介紹</a>
+                    <a href="jobs.html" class="hover:text-sakura-300 transition">職業系統</a>
+                    <a href="tech.html" class="text-sakura-300">技術架構</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen pt-24 px-4 z-10">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="font-serif text-5xl font-bold text-center mb-4 text-glow">🛠️ 技術架構</h1>
+            <p class="text-center text-gray-400 mb-12">幽幽子 Bot 的企業級技術棧</p>
+
+            <!-- 核心框架 -->
+            <div class="glass-pink p-8 rounded-3xl mb-8 border border-sakura-500/30">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">🌟 核心框架</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold text-lg">py-cord==2.6.1</code>
+                        <p class="text-sm text-gray-400 mt-1">Discord.py 的現代化分支，提供強大的 Slash Commands 支援</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold text-lg">Python 3.10+</code>
+                        <p class="text-sm text-gray-400 mt-1">使用最新的 Python 特性，包括 match-case 與型別提示</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 非同步處理 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">⚡ 非同步處理</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">aiohttp==3.13.2</code>
+                        <p class="text-xs text-gray-400 mt-1">非同步 HTTP 客戶端/伺服器框架</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">anyio==4.14.0</code>
+                        <p class="text-xs text-gray-400 mt-1">非同步網路 I/O 抽象層</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">aiosignal==1.4.0</code>
+                        <p class="text-xs text-gray-400 mt-1">非同步信號處理</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 數據管理 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">💾 數據管理</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">PyYAML==6.0.1</code>
+                        <p class="text-xs text-gray-400 mt-1">YAML 檔案解析與生成</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">jsonschema==4.10.3</code>
+                        <p class="text-xs text-gray-400 mt-1">JSON 數據驗證</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">sqlite3</code>
+                        <p class="text-xs text-gray-400 mt-1">Python 內建 SQLite 資料庫（自動備份）</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 數據視覺化 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">📊 數據視覺化</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">matplotlib==3.10.7</code>
+                        <p class="text-xs text-gray-400 mt-1">繪圖庫（用於 /fish_rates 機率圖）</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">numpy==2.3.5</code>
+                        <p class="text-xs text-gray-400 mt-1">數值計算庫</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">pillow==10.2.0</code>
+                        <p class="text-xs text-gray-400 mt-1">圖像處理庫</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 安全與加密 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">🔐 安全與加密</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">cryptography==41.0.7</code>
+                        <p class="text-xs text-gray-400 mt-1">加密與解密功能</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">PyNaCl==1.5.0</code>
+                        <p class="text-xs text-gray-400 mt-1">NaCl 加密庫（Discord 語音）</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">bcrypt==3.2.2</code>
+                        <p class="text-xs text-gray-400 mt-1">密碼哈希函數</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 環境變數與配置 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">⚙️ 環境配置</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">python-dotenv==1.2.1</code>
+                        <p class="text-xs text-gray-400 mt-1">.env 檔案載入</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">PyJWT==2.7.0</code>
+                        <p class="text-xs text-gray-400 mt-1">JWT Token 處理</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 網路請求 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">🌐 網路請求</h2>
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">requests==2.31.0</code>
+                        <p class="text-xs text-gray-400 mt-1">HTTP 請求庫</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">httpx==0.28.1</code>
+                        <p class="text-xs text-gray-400 mt-1">現代 HTTP 客戶端</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">urllib3==2.0.7</code>
+                        <p class="text-xs text-gray-400 mt-1">HTTP 客戶端庫</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 整合 -->
+            <div class="glass-pink p-8 rounded-3xl mb-8 border border-purple-500/30">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">🤖 AI 整合（可選）</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">openai==2.41.1</code>
+                        <p class="text-xs text-gray-400 mt-1">OpenAI API 整合</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">jiter==0.15.0</code>
+                        <p class="text-xs text-gray-400 mt-1">JSON 解析加速</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他工具 -->
+            <div class="glass p-8 rounded-3xl mb-8 border border-sakura-500/20">
+                <h2 class="font-serif text-2xl font-bold text-sakura-300 mb-6">🔧 其他工具庫</h2>
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">rich==13.7.1</code>
+                        <p class="text-xs text-gray-400 mt-1">終端美化</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">tqdm==4.67.1</code>
+                        <p class="text-xs text-gray-400 mt-1">進度條</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">pydantic==2.13.4</code>
+                        <p class="text-xs text-gray-400 mt-1">數據驗證</p>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <code class="text-sakura-400 font-bold">Babel==2.10.3</code>
+                        <p class="text-xs text-gray-400 mt-1">國際化支援</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 px-4 border-t border-white/10 relative z-10 bg-black/30 text-center text-sm text-gray-400">
+        <p>Made with 💤 and 🍡 by Shiroko</p>
+    </footer>
+
+    <script src="../js/main.js" defer></script>
+</body>
+</html>
