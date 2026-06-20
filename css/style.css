@@ -1,0 +1,229 @@
+/* =========================================
+   1. 基礎設定與字體
+   ========================================= */
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+    color: #f8fafc;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. 玻璃擬態效果 (Glassmorphism)
+   ========================================= */
+.glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-pink {
+    background: rgba(255, 183, 197, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 183, 197, 0.2);
+}
+
+/* =========================================
+   3. 文字與按鈕特效
+   ========================================= */
+.text-glow {
+    text-shadow: 0 0 10px rgba(255, 183, 197, 0.5), 0 0 20px rgba(255, 183, 197, 0.3);
+}
+
+.btn-glow:hover {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.6), 0 0 30px rgba(255, 105, 180, 0.4);
+}
+
+/* =========================================
+   4. 櫻花飄落動畫
+   ========================================= */
+.sakura-petal {
+    position: fixed;
+    top: -10vh;
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, #ffb7c5 0%, #ff91a4 50%, rgba(255,183,197,0) 70%);
+    border-radius: 150% 0 150% 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { 
+        transform: translateY(-10vh) rotate(0deg); 
+        opacity: 1; 
+    }
+    100% { 
+        transform: translateY(110vh) rotate(360deg); 
+        opacity: 0; 
+    }
+}
+
+/* =========================================
+   5. 自定義滾動條
+   ========================================= */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1a0b2e;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff69b4;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #ff1493;
+}
+
+/* =========================================
+   6. 可展開卡片樣式 (核心修改：浮動展開)
+   ========================================= */
+.expandable-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative; /* 作為絕對定位子元素的參考點 */
+    overflow: visible;  /* 允許內容溢出卡片邊界 */
+    z-index: 1;         /* 基礎層級 */
+}
+
+.expandable-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 105, 180, 0.4);
+}
+
+/* 展開箭頭動畫 */
+.expand-arrow {
+    transition: transform 0.3s ease;
+    color: #ffb7c5;
+}
+
+.expandable-card.expanded .expand-arrow {
+    transform: rotate(180deg);
+}
+
+/* 展開內容：使用絕對定位，完全脫離文檔流，不擠佔空間 */
+.expandable-card .expand-content {
+    position: absolute;
+    top: 100%; /* 緊貼卡片底部 */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 修正居中偏移 */
+    width: calc(100% + 2rem); /* 比卡片稍寬，視覺更平衡 */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+    padding: 0 1.5rem;
+    
+    /* 視覺樣式：深色背景 + 邊框 + 陰影 */
+    background: linear-gradient(180deg, rgba(45, 27, 78, 0.98) 0%, rgba(26, 11, 46, 0.95) 100%);
+    border: 1px solid rgba(255, 183, 197, 0.3);
+    border-top: none;
+    border-radius: 0 0 1.5rem 1.5rem;
+    z-index: 50; /* 確保顯示在其他卡片上方 */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(255, 105, 180, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* 展開狀態 */
+.expandable-card.expanded .expand-content {
+    max-height: 2000px; /* 足夠大的值以容納內容 */
+    opacity: 1;
+    padding: 1.5rem;
+    margin-top: 0.5rem; /* 與卡片保持一點距離 */
+}
+
+/* 展開時提升卡片層級，防止被旁邊卡片遮擋 */
+.expandable-card.expanded {
+    z-index: 100;
+}
+
+/* 手機版適配 */
+@media (max-width: 768px) {
+    .expandable-card:hover {
+        transform: none; /* 手機上取消 hover 位移 */
+    }
+    
+    .expandable-card .expand-content {
+        width: calc(100% + 1rem);
+        padding: 0 1rem;
+    }
+    
+    .expandable-card.expanded .expand-content {
+        padding: 1rem;
+    }
+}
+
+/* =========================================
+   7. 內容區塊樣式 (代碼塊、提示框等)
+   ========================================= */
+.code-block {
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 3px solid #ff69b4;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-family: 'Courier New', monospace;
+    color: #ffb7c5;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    margin: 0.5rem 0;
+}
+
+.tip-box {
+    background: rgba(255, 183, 197, 0.1);
+    border: 1px solid rgba(255, 183, 197, 0.3);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.warning-box {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 0.75rem;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #fca5a5;
+    margin-top: 0.5rem;
+}
+
+/* =========================================
+   8. 漢堡選單樣式
+   ========================================= */
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.mobile-menu.open {
+    max-height: 500px;
+}
+
+.hamburger-line {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #ffb7c5;
+    transition: all 0.3s ease;
+    margin: 5px 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
