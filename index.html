@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Yuyuko Bot - 冥界的櫻花守護者</title>
+    <meta name="description" content="一個結合了深度經濟系統、沉浸式釣魚與優雅腹黑的 Discord 機器人。">
+    
+    <!-- Tailwind CSS CDN & 自定義配置 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        nether: {
+                            900: '#1a0b2e',
+                            800: '#2d1b4e',
+                            700: '#422875',
+                        },
+                        sakura: {
+                            300: '#ffb7c5',
+                            400: '#ff91a4',
+                            500: '#ff69b4',
+                            600: '#ff1493',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 引入自定義 CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="relative">
+
+    <!-- 櫻花飄落動畫背景容器 -->
+    <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0"></div>
+
+    <!-- 導航欄（含漢堡選單） -->
+    <nav class="fixed w-full z-50 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <span class="text-3xl">🌸</span>
+                    <span class="font-serif font-bold text-xl text-sakura-300">Yuyuko Bot</span>
+                </a>
+                
+                <!-- 桌面版選單 -->
+                <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
+                    <a href="#about" class="hover:text-sakura-300 transition">關於</a>
+                    <a href="pages/commands.html" class="hover:text-sakura-300 transition">指令介紹</a>
+                    <a href="pages/jobs.html" class="hover:text-sakura-300 transition">職業系統</a>
+                    <a href="pages/tech.html" class="hover:text-sakura-300 transition">技術架構</a>
+                </div>
+                
+                <a href="#invite" class="hidden md:inline-block bg-sakura-500 hover:bg-sakura-600 text-white px-4 py-2 rounded-full text-sm font-bold transition btn-glow">
+                    邀請幽幽子
+                </a>
+
+                <!-- 手機版漢堡選單按鈕 -->
+                <button id="hamburger" class="md:hidden p-2" aria-label="選單">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </div>
+
+            <!-- 手機版展開選單 -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="py-4 space-y-3 border-t border-white/10">
+                    <a href="#about" class="block text-gray-300 hover:text-sakura-300 transition py-2">關於</a>
+                    <a href="pages/commands.html" class="block text-gray-300 hover:text-sakura-300 transition py-2">指令介紹</a>
+                    <a href="pages/jobs.html" class="block text-gray-300 hover:text-sakura-300 transition py-2">職業系統</a>
+                    <a href="pages/tech.html" class="block text-gray-300 hover:text-sakura-300 transition py-2">技術架構</a>
+                    <a href="#invite" class="block text-sakura-300 font-bold py-2">邀請幽幽子</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (首屏) -->
+    <section class="relative min-h-screen flex items-center justify-center px-4 pt-16 z-10">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="animate-float text-8xl mb-6">🌸</div>
+            <h1 class="font-serif text-5xl md:text-7xl font-black text-glow mb-6 leading-tight">
+                冥界的櫻花守護者<br>
+                <span class="text-sakura-300">幽幽子 Bot</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+                「哈～你來啦？別吵...我正在 dreaming about dango...」<br>
+                一個結合了深度經濟系統、沉浸式釣魚、優雅腹黑與企業級數據安全的 Discord 機器人。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#invite" class="bg-sakura-500 hover:bg-sakura-600 text-white px-8 py-4 rounded-full text-lg font-bold transition btn-glow shadow-lg shadow-sakura-500/30">
+                    🌸 邀請幽幽子賞花
+                </a>
+                <a href="https://github.com/Shiroko253/Yuyuko-bot" target="_blank" class="glass hover:bg-white/10 text-white px-8 py-4 rounded-full text-lg font-bold transition border border-white/20">
+                    💻 GitHub 原始碼
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section (關於 Bot) -->
+    <section id="about" class="py-24 px-4 relative z-10">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="font-serif text-4xl font-bold text-center mb-12 text-glow">🌸 關於幽幽子 Bot</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 技術棧 -->
+                <div class="glass p-8 rounded-3xl border border-sakura-500/20">
+                    <h3 class="font-serif text-2xl font-bold text-sakura-300 mb-6 flex items-center">
+                        <span class="mr-3">💻</span> 技術架構
+                    </h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>開發語言：</strong>Python 3.10+</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>核心框架：</strong>Py-cord v2.6.1 (Discord.py 分支)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>數據管理：</strong>SQLite + JSON + YAML</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>非同步處理：</strong>asyncio + aiohttp</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>數據視覺化：</strong>Matplotlib</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 部署方式 -->
+                <div class="glass p-8 rounded-3xl border border-sakura-500/20">
+                    <h3 class="font-serif text-2xl font-bold text-sakura-300 mb-6 flex items-center">
+                        <span class="mr-3">🚀</span> 部署與運行
+                    </h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>運行環境：</strong>Linux / Docker / PM2</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>啟動方式：</strong>Systemd Service / Docker Compose</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>日誌系統：</strong>雙層日誌 (main-error.log + commands_error.log)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>自動備份：</strong>每日凌晨 4 點 SQLite 熱備份</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-sakura-400 mr-2">▸</span>
+                            <span><strong>錯誤追蹤：</strong>企業級 commands_error_logger</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 核心特色簡介 -->
+            <div class="mt-12 glass-pink p-8 rounded-3xl border border-sakura-500/30">
+                <h3 class="font-serif text-2xl font-bold text-sakura-300 mb-6 text-center">✨ 核心特色</h3>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="text-4xl mb-3">💰</div>
+                        <h4 class="font-bold text-white mb-2">深度經濟系統</h4>
+                        <p class="text-sm text-gray-400">體力機制、職業系統、借貸系統、稅收系統完美閉環</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">🎣</div>
+                        <h4 class="font-bold text-white mb-2">沉浸式釣魚</h4>
+                        <p class="text-sm text-gray-400">100+ 種漁獲、職業被動、稀有度系統</p>
+                    </div>
+                    <div>
+                        <div class="text-4xl mb-3">🛡️</div>
+                        <h4 class="font-bold text-white mb-2">企業級安全</h4>
+                        <p class="text-sm text-gray-400">SakuraDataManager、雙重鎖、深拷貝保護</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Invite Section (邀請) -->
+    <section id="invite" class="py-24 px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center glass-pink p-12 rounded-[3rem] border border-sakura-500/30 shadow-2xl shadow-sakura-500/10">
+            <h2 class="font-serif text-4xl font-bold mb-4 text-glow">準備好迎接幽幽子了嗎？</h2>
+            <p class="text-gray-300 mb-8 text-lg">點擊下方按鈕，讓冥界的櫻花飄進你的伺服器吧！</p>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=YOUR_BOT_ID&permissions=8&scope=bot%20applications.commands" target="_blank" class="inline-block bg-sakura-500 hover:bg-sakura-600 text-white px-10 py-5 rounded-full text-xl font-bold transition btn-glow shadow-lg shadow-sakura-500/40">
+                🌸 邀請幽幽子賞花
+            </a>
+            <p class="mt-6 text-sm text-gray-400">* 請確保幽幽子的角色權限位於伺服器最高處哦～</p>
+        </div>
+    </section>
+
+    <!-- Footer (頁尾) -->
+    <footer class="py-12 px-4 border-t border-white/10 relative z-10 bg-black/30">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-2xl">🌸</span>
+                <span class="font-serif font-bold text-lg text-sakura-300">Yuyuko Bot</span>
+            </div>
+            <div class="text-center md:text-right text-sm text-gray-400">
+                <p>Made with 💤 and  by <span class="text-sakura-300 font-bold">Shiroko</span></p>
+                <p class="mt-1">Licensed under <a href="https://github.com/Shiroko253/Yuyuko-bot/blob/main/LICENSE" class="underline hover:text-sakura-300">GPL-3.0</a> | Please don't steal her snacks.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入自定義 JS -->
+    <script src="js/main.js" defer></script>
+</body>
+</html>
