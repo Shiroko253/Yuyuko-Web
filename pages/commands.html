@@ -11,27 +11,23 @@
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['"Noto Serif TC"', 'serif'],
-                        sans: ['"Noto Sans TC"', 'sans-serif'],
-                    },
+                    fontFamily: { serif: ['"Noto Serif TC"', 'serif'], sans: ['"Noto Sans TC"', 'sans-serif'] },
                     colors: {
-                        sakura: {
-                            300: '#ffb7c5',
-                            400: '#ff91a4',
-                            500: '#ff69b4',
-                            600: '#ff1493',
-                        }
+                        nether: { 900: '#1a0b2e', 800: '#2d1b4e', 700: '#422875' },
+                        sakura: { 300: '#ffb7c5', 400: '#ff91a4', 500: '#ff69b4', 600: '#ff1493' }
                     }
                 }
             }
         }
     </script>
 </head>
-<body class="relative">
+<body class="relative min-h-screen">
+    <!-- 背景漸層 -->
+    <div class="fixed inset-0 bg-gradient-to-br from-nether-900 via-nether-800 to-nether-900 z-[-1]"></div>
+    <!-- 櫻花動畫容器 -->
     <div id="sakura-container" class="fixed inset-0 pointer-events-none z-0"></div>
 
-    <!-- 導航欄（含漢堡選單） -->
+    <!-- 導航欄 -->
     <nav class="fixed w-full z-50 glass border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
@@ -39,24 +35,16 @@
                     <span class="text-3xl">🌸</span>
                     <span class="font-serif font-bold text-xl text-sakura-300">Yuyuko Bot</span>
                 </a>
-                
-                <!-- 桌面版選單 -->
                 <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-300">
                     <a href="../index.html" class="hover:text-sakura-300 transition">首頁</a>
                     <a href="commands.html" class="text-sakura-300">指令介紹</a>
                     <a href="jobs.html" class="hover:text-sakura-300 transition">職業系統</a>
                     <a href="tech.html" class="hover:text-sakura-300 transition">技術架構</a>
                 </div>
-
-                <!-- 手機版漢堡選單按鈕 -->
                 <button id="hamburger" class="md:hidden p-2" aria-label="選單">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span><span class="hamburger-line"></span><span class="hamburger-line"></span>
                 </button>
             </div>
-
-            <!-- 手機版展開選單 -->
             <div id="mobile-menu" class="mobile-menu md:hidden">
                 <div class="py-4 space-y-3 border-t border-white/10">
                     <a href="../index.html" class="block text-gray-300 hover:text-sakura-300 transition py-2">首頁</a>
@@ -68,6 +56,7 @@
         </div>
     </nav>
 
+    <!-- 主要內容 -->
     <section class="relative min-h-screen pt-24 pb-12 px-4 z-10">
         <div class="max-w-6xl mx-auto">
             <h1 class="font-serif text-4xl md:text-5xl font-bold text-center mb-4 text-glow">📜 冥界指令大全</h1>
@@ -76,586 +65,85 @@
 
             <!-- 一般指令 -->
             <div class="mb-12">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center">
-                    <span class="mr-3">🍵</span> 一般與管理指令
-                </h2>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center"><span class="mr-3">🍵</span> 一般與管理指令</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    
-                    <!-- /ping -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/ping</code>
-                                <p class="text-sm text-gray-400 mt-1">檢查 Bot 延遲與運行狀態</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">透過 5 次 WebSocket 心跳採樣，計算 Bot 與 Discord 伺服器的平均延遲，並顯示 SSS ~ B 級的性能評級。</p>
-                                </div>
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/ping</div>
-                                </div>
-                                <div class="tip-box">
-                                    <p class="text-sakura-300">💡 小提示：延遲數值為 WebSocket RTT，若顯示「計算中」代表 Bot 剛啟動或正在重連。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/ping</code><p class="text-sm text-gray-400 mt-1">檢查 Bot 延遲與運行狀態</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div><p class="text-sakura-300 font-bold mb-1">📖 介紹</p><p class="text-gray-300">透過 5 次 WebSocket 心跳採樣，計算 Bot 與 Discord 伺服器的平均延遲。</p></div><div><p class="text-sakura-300 font-bold mb-1">💡 用法</p><div class="code-block">/ping</div></div></div></div>
                     </div>
-
-                    <!-- /server_info -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/server_info</code>
-                                <p class="text-sm text-gray-400 mt-1">查看伺服器詳細資訊</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">顯示伺服器名稱、擁有者、成員數（區分人類/Bot）、頻道數、加成狀態、創建時間等詳細資訊。</p>
-                                </div>
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/server_info</div>
-                                </div>
-                                <div class="tip-box">
-                                    <p class="text-sakura-300">🔍 特色功能：點擊「查看伺服器圖示」按鈕可放大查看伺服器大圖。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/user_info</code><p class="text-sm text-gray-400 mt-1">查看用戶個人資料與職業</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/user_info [@用戶]</div><div class="warning-box"><p>🚨 <strong>新帳號雷達</strong>：若帳號創立未滿 4 週，會自動顯示高危警告！</p></div></div></div>
                     </div>
-
-                    <!-- /user_info -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/user_info</code>
-                                <p class="text-sm text-gray-400 mt-1">查看用戶個人資料與職業</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">顯示用戶的 Discord 資料、帳號創建時間、加入伺服器時間、暱稱、最高角色、頭像、橫幅，以及職業與體力狀態。</p>
-                                </div>
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/user_info @用戶</div>
-                                    <p class="text-gray-400 text-xs mt-1">不填則查詢自己</p>
-                                </div>
-                                <div class="warning-box">
-                                    <p>🚨 <strong>新帳號雷達</strong>：若帳號創立未滿 4 週，會自動顯示高危警告（Spam Bot、木馬、惡意連結等）！</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/ban</code><p class="text-sm text-gray-400 mt-1">封禁用戶（支援 Hackban）</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/ban @用戶 [理由] [刪除訊息天數]</div><div class="warning-box"><p>⚠️ 需要「封禁成員」權限，且幽幽子的角色必須高於目標。</p></div></div></div>
                     </div>
-
-                    <!-- /ban -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/ban</code>
-                                <p class="text-sm text-gray-400 mt-1">封禁用戶（支援 Hackban）</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">將用戶放逐出冥界。支援兩種模式：直接選擇伺服器內成員，或輸入 User ID 進行 Hackban（封禁不在伺服器的用戶）。</p>
-                                </div>
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/ban @用戶 [理由] [刪除訊息天數]</div>
-                                    <div class="code-block mt-2">/ban user_id:123456789 惡意刷屏 7</div>
-                                </div>
-                                <div class="warning-box">
-                                    <p>⚠️ 需要「封禁成員」權限，且幽幽子的角色必須高於目標。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/timeout</code><p class="text-sm text-gray-400 mt-1">禁言用戶</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/timeout @用戶 時長(分鐘) [理由]</div><div class="tip-box"><p>💡 最長可禁言 27 天，會自動發送私訊通知被禁言者。</p></div></div></div>
                     </div>
-
-                    <!-- /kick -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/kick</code>
-                                <p class="text-sm text-gray-400 mt-1">踢出用戶</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/kick @用戶 [理由]</div>
-                                </div>
-                                <div class="tip-box">
-                                    <p>💡 被踢出的用戶可以重新加入伺服器，與 /ban 不同。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /timeout -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/timeout</code>
-                                <p class="text-sm text-gray-400 mt-1">禁言用戶</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/timeout @用戶 時長(分鐘) [理由]</div>
-                                    <div class="code-block mt-2">/timeout @小明 60 刷屏</div>
-                                </div>
-                                <div class="tip-box">
-                                    <p>💡 最長可禁言 27 天（40320 分鐘），會自動發送私訊通知被禁言者。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /untimeout -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/untimeout</code>
-                                <p class="text-sm text-gray-400 mt-1">解除禁言</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div class="code-block">/untimeout @用戶</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /start_giveaway -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/start_giveaway</code>
-                                <p class="text-sm text-gray-400 mt-1">開始抽獎活動</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">💡 用法</p>
-                                    <div class="code-block">/start_giveaway 時長(秒) 獎品</div>
-                                    <div class="code-block mt-2">/start_giveaway 3600 Switch 遊戲機</div>
-                                </div>
-                                <div class="tip-box">
-                                    <p>💡 時間到自動開獎，管理員也可點擊「提前結束」按鈕。每個伺服器同時只能進行一場抽獎。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /quiz -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/quiz</code>
-                                <p class="text-sm text-gray-400 mt-1">幽幽子的問答挑戰</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">回答幽幽子的謎題，答對獲得幽靈幣獎勵（含隨機加成），答錯會被優雅地嘲諷～</p>
-                                </div>
-                                <div class="code-block">/quiz</div>
-                                <div class="tip-box">
-                                    <p>💡 30 秒內作答，題目會自動判斷難度（easy/medium/hard/extreme），難度越高獎勵越豐厚！</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
             <!-- 經濟指令 -->
             <div class="mb-12">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center">
-                    <span class="mr-3">💰</span> 經濟與體力系統
-                </h2>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center"><span class="mr-3">💰</span> 經濟與體力系統</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    
-                    <!-- /balance -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/balance</code>
-                                <p class="text-sm text-gray-400 mt-1">查看幽靈幣餘額</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/balance [@用戶]</div>
-                            <p class="text-gray-300 text-sm mt-2">不填則查詢自己。顯示手頭餘額與個人金庫存款。</p>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/work</code><p class="text-sm text-gray-400 mt-1">工作賺取幽靈幣</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/work</div><div class="tip-box"><p>💡 冷卻時間 1 小時。體力不足時請去 <code>/shop</code> 買食物恢復。</p></div><div class="warning-box"><p>⚠️ 賭徒職業無法使用此指令，只能去 <code>/blackjack</code> 賭博。</p></div></div></div>
                     </div>
-
-                    <!-- /work -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/work</code>
-                                <p class="text-sm text-gray-400 mt-1">工作賺取幽靈幣</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">根據你的職業賺取幽靈幣，同時消耗體力。不同職業薪資範圍與體力消耗不同。</p>
-                                </div>
-                                <div class="code-block">/work</div>
-                                <div class="tip-box">
-                                    <p>💡 冷卻時間 1 小時。體力不足時請去 <code>/shop</code> 買食物或從 <code>/backpack</code> 吃東西恢復。</p>
-                                </div>
-                                <div class="warning-box">
-                                    <p>⚠️ 賭徒職業無法使用此指令，只能去 <code>/blackjack</code> 賭博。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/shop</code><p class="text-sm text-gray-400 mt-1">購買食物恢復體力</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/shop</div><div class="tip-box"><p>💡 包含 39 種食物，購買後進入背包，可立即食用或留待之後使用。</p></div></div></div>
                     </div>
-
-                    <!-- /choose_job -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/choose_job</code>
-                                <p class="text-sm text-gray-400 mt-1">選擇正職與副職</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">開啟職業選單，選擇你的正職（決定薪資）與副職（解鎖被動技能）。</p>
-                                </div>
-                                <div class="code-block">/choose_job</div>
-                                <div class="tip-box">
-                                    <p>💡 更換正職需先用 <code>/reset_job</code> 重置。詳細職業介紹請看 <a href="jobs.html" class="text-sakura-300 underline">職業系統頁面</a>。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/server_bank</code><p class="text-sm text-gray-400 mt-1">個人金庫（存/提/借）</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/server_bank</div><div class="warning-box"><p>⚠️ 逾期 7 天債務 ×2，之後每週 ×4！逾期 30 天將強制扣款並扣除信譽。</p></div></div></div>
                     </div>
-
-                    <!-- /reset_job -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/reset_job</code>
-                                <p class="text-sm text-gray-400 mt-1">重置職業</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/reset_job</div>
-                            <p class="text-gray-300 text-sm mt-2">清除當前正職與副職，同時清除工作冷卻時間。</p>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/tax</code><p class="text-sm text-gray-400 mt-1">徵收說話稅（管理員）</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/tax</div><p class="text-gray-300 mt-2">對伺服器所有用戶徵收累進稅率 (5% ~ 40%)。</p></div></div>
                     </div>
-
-                    <!-- /shop -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/shop</code>
-                                <p class="text-sm text-gray-400 mt-1">購買食物恢復體力</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">造訪幽幽子的貪吃冥界商店，購買 39 種食物與道具。包含現世速食、冥界特產、台灣水果、東方 Project 聯名餐點。</p>
-                                </div>
-                                <div class="code-block">/shop</div>
-                                <div class="tip-box">
-                                    <p>💡 商品價格 = 基礎價格 + 稅率。購買後物品進入背包，可立即食用或留待之後使用。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /backpack -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/backpack</code>
-                                <p class="text-sm text-gray-400 mt-1">查看與使用背包物品</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div class="code-block">/backpack</div>
-                                <p class="text-gray-300 mt-2">選擇物品後可：</p>
-                                <ul class="list-disc list-inside text-gray-300 space-y-1 ml-2">
-                                    <li><strong>✨ 享用它</strong>：恢復體力</li>
-                                    <li><strong>💝 送給幽幽子</strong>：捐贈物品（菸酒會被婉拒）</li>
-                                    <li><strong>❌ 算了</strong>：保留物品</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /server_bank -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/server_bank</code>
-                                <p class="text-sm text-gray-400 mt-1">個人金庫（存/提/借）</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">將幽靈幣存入個人金庫賺取利息，或向國庫借貸。借貸採用累進利率（借越多利率越高）。</p>
-                                </div>
-                                <div class="code-block">/server_bank</div>
-                                <div class="warning-box">
-                                    <p>⚠️ 逾期 7 天債務 ×2，之後每週 ×4！逾期 30 天將強制扣款並扣除信譽分數。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /credit -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/credit</code>
-                                <p class="text-sm text-gray-400 mt-1">查看借貸信譽分數</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/credit</div>
-                            <p class="text-gray-300 text-sm mt-2">顯示 0~10 分的信譽等級。分數歸零會被加入黑名單，無法再借貸。</p>
-                        </div>
-                    </div>
-
-                    <!-- /pay -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/pay</code>
-                                <p class="text-sm text-gray-400 mt-1">轉帳給其他用戶</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/pay @用戶 金額</div>
-                        </div>
-                    </div>
-
-                    <!-- /tax -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/tax</code>
-                                <p class="text-sm text-gray-400 mt-1">徵收說話稅（管理員）</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div class="code-block">/tax</div>
-                                <p class="text-gray-300 mt-2">對伺服器所有用戶徵收累進稅率：</p>
-                                <ul class="list-disc list-inside text-gray-300 space-y-1 ml-2">
-                                    <li>&lt; 1,000：5%</li>
-                                    <li>1,000 ~ 10,000：10%</li>
-                                    <li>10,000 ~ 100,000：20%</li>
-                                    <li>100,000 ~ 1,000,000：30%</li>
-                                    <li>&gt; 1,000,000：40%</li>
-                                </ul>
-                                <div class="tip-box">
-                                    <p>💡 稅金會進入伺服器國庫，並記錄每個用戶的貢獻度。</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- /leaderboard -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/leaderboard</code>
-                                <p class="text-sm text-gray-400 mt-1">查看排行榜</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/leaderboard</div>
-                            <p class="text-gray-300 text-sm mt-2">顯示伺服器前 10 名的幽靈幣餘額與國庫貢獻排行榜。</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
             <!-- 釣魚指令 -->
             <div class="mb-12">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center">
-                    <span class="mr-3">🎣</span> 釣魚系統
-                </h2>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center"><span class="mr-3">🎣</span> 釣魚系統</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    
-                    <!-- /fish -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/fish</code>
-                                <p class="text-sm text-gray-400 mt-1">沉浸式釣魚</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div>
-                                    <p class="text-sakura-300 font-bold mb-1">📖 介紹</p>
-                                    <p class="text-gray-300">根據你的職業觸發不同釣魚情境：岸邊悠閒垂釣、漁夫出海搏鬥巨物、釣魚佬挑戰大魚大貨秘境。</p>
-                                </div>
-                                <div class="code-block">/fish</div>
-                                <div class="tip-box">
-                                    <p>💡 釣到的魚可選擇「保存」進入漁獲背包，或「再釣一次」繼續挑戰。100+ 種漁獲等你發現！</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/fish</code><p class="text-sm text-gray-400 mt-1">沉浸式釣魚</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/fish</div><div class="tip-box"><p>💡 根據職業觸發不同情境。100+ 種漁獲等你發現！</p></div></div></div>
                     </div>
-
-                    <!-- /fish_back -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/fish_back</code>
-                                <p class="text-sm text-gray-400 mt-1">查看漁獲背包</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/fish_back</div>
-                            <p class="text-gray-300 text-sm mt-2">按稀有度排序顯示你的所有漁獲收藏。</p>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/fish_rates</code><p class="text-sm text-gray-400 mt-1">查看釣魚機率</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/fish_rates</div><p class="text-gray-300 mt-2">顯示各稀有度漁獲的機率分布餅圖。</p></div></div>
                     </div>
-
-                    <!-- /fish_shop -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/fish_shop</code>
-                                <p class="text-sm text-gray-400 mt-1">出售漁獲</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/fish_shop</div>
-                            <p class="text-gray-300 text-sm mt-2">將漁獲出售換取幽靈幣，稀有度越高價格越好。</p>
-                        </div>
-                    </div>
-
-                    <!-- /fish_rates -->
-                    <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/fish_rates</code>
-                                <p class="text-sm text-gray-400 mt-1">查看釣魚機率</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="code-block">/fish_rates</div>
-                            <p class="text-gray-300 text-sm mt-2">顯示各稀有度漁獲的機率分布餅圖，包含職業被動加成後的實際機率。</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
             <!-- 賭博指令 -->
             <div class="mb-12">
-                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center">
-                    <span class="mr-3">🎲</span> 賭博與小遊戲
-                </h2>
+                <h2 class="font-serif text-2xl md:text-3xl font-bold text-sakura-300 mb-6 flex items-center"><span class="mr-3">🎲</span> 賭博與小遊戲</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    
-                    <!-- /blackjack -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/blackjack</code>
-                                <p class="text-sm text-gray-400 mt-1">單人 21 點</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div class="code-block">/blackjack 金額</div>
-                                <div class="tip-box">
-                                    <p>💡 支援 Hit（抽牌）、Stand（停牌）、Double（雙倍下注）。賭徒職業享有 x3 下注 / x6 返還被動！</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/blackjack</code><p class="text-sm text-gray-400 mt-1">單人 21 點</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/blackjack 金額</div><div class="tip-box"><p>💡 賭徒職業享有 x3 下注 / x6 返還被動！</p></div></div></div>
                     </div>
-
-                    <!-- /blackjack_pvp -->
                     <div class="expandable-card glass p-5 rounded-2xl border border-sakura-500/20">
-                        <div class="flex justify-between items-start">
-                            <div class="flex-1">
-                                <code class="text-sakura-400 font-bold text-lg">/blackjack_pvp</code>
-                                <p class="text-sm text-gray-400 mt-1">玩家對決 21 點</p>
-                            </div>
-                            <span class="expand-arrow text-2xl">▼</span>
-                        </div>
-                        <div class="expand-content">
-                            <div class="space-y-3 text-sm">
-                                <div class="code-block">/blackjack_pvp @對手 金額</div>
-                                <p class="text-gray-300 mt-2">勝者通吃獎池。擊敗賭徒可獲得額外獎勵！</p>
-                            </div>
-                        </div>
+                        <div class="flex justify-between items-start"><div class="flex-1"><code class="text-sakura-400 font-bold text-lg">/blackjack_pvp</code><p class="text-sm text-gray-400 mt-1">玩家對決 21 點</p></div><span class="expand-arrow text-2xl">▼</span></div>
+                        <div class="expand-content"><div class="space-y-3 text-sm"><div class="code-block">/blackjack_pvp @對手 金額</div><p class="text-gray-300 mt-2">勝者通吃獎池。擊敗賭徒可獲得額外獎勵！</p></div></div>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </section>
 
     <footer class="py-8 px-4 border-t border-white/10 relative z-10 bg-black/30 text-center text-sm text-gray-400">
         <p>Made with 💤 and 🍡 by Shiroko</p>
     </footer>
-
     <script src="../js/main.js" defer></script>
 </body>
 </html>
